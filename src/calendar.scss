@@ -3,4 +3,40 @@ section{
     .addEvent{
 
     }
+    th{
+      width: 115px;
+    }
+    td, .dateElement{
+        background-color: white;
+    }
+    .selected {
+        background-color: aquamarine;
+    }
+
+    .dateButton{
+        padding:10px;
+        width: 100%;
+    }
+
+
+  .prompt {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .prompt {
+      visibility: hidden;
+
+  }
+  .prompt .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+  }
+
 }

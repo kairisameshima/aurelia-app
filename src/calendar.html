@@ -1,7 +1,7 @@
 <template>
   <section class="au-animate">
     <h2>${heading}</h2>
-    <button click.delegate="addEvent()">Add Event</button>
+    <button click.delegate="editEvent()">Edit Event</button>
     <table>
       <thead>
         <th>Sunday</th>
@@ -14,18 +14,66 @@
       </thead>
       <tbody>
         <tr>
-          <td repeat.for="i of [1,2,3,4,5,6,7]">${i}</td>
+          <td class="dateElement" repeat.for="i of [1,2,3,4,5,6,7]">
+            <button class="dateButton" id="${i}" click.delegate="dateSelected(i)">${i}</button>
+            <span id="${i}events"></span>
+          </td>
         </tr>
         <tr>
-          <td repeat.for="i of [8,9,10,11,12,13,14]">${i}</td>
+          <td class="dateElement" repeat.for="i of [8,9,10,11,12,13,14]">
+            <button class="dateButton" id="${i}" click.delegate="dateSelected()">${i}</button>
+            <span id="${i}events"></span>
+          </td>
         </tr>
         <tr>
-          <td repeat.for="i of [15,16,17,18,19,20,21]">${i}</td>
+          <td class="dateElement" repeat.for="i of [15,16,17,18,19,20,21]">
+            <button class="dateButton" id="${i}" click.delegate="dateSelected()">${i}</button>
+            <span id="${i}events"></span>
+          </td>
         </tr>
         <tr>
-          <td repeat.for="i of [22,23,24,25,26,27,28]">${i}</td>
+          <td class="dateElement" repeat.for="i of [22,23,24,25,26,27,28]">
+            <button class="dateButton" id="${i}" click.delegate="dateSelected()">${i}</button>
+            <span id="${i}events"></span>
+          </td>
         </tr>
       </tbody>
     </table>
+    <!--<div class="addPrompt">-->
+      <!--<span class="addText" id="">Popup text...</span>-->
+    <!--</div>-->
+
+    <!-- prompt div contains the table to display the events and the buttons to add and delete events-->
+    <div id="prompt">
+      <h2>${promptHeading}</h2>
+      <!--<button>-->
+        <!--Add Event-->
+      <!--</button>-->
+      <!--<button>-->
+        <!--Remove last Event-->
+      <!--</button>-->
+      <div id="eventList">
+      </div>
+
+      <select change.delegate="selectEvent()">
+        <option value="-1"></option><!-- Option repeats should probably be in a template but I didn't spend enough time looking at binding to parent properties. -->
+        <option repeat.for="event of dateEvents" value="${event.eventId}">${event.eventName}</option>
+      </select>
+
+      <label id="eventNameInput" for="eventName">Event Name</label>
+      <input type="text" id="eventName" value.bind="currentEvent['eventName']">
+      <label for="eventDate">Date</label>
+      <select id="eventDate" value="$selectedDate">
+        <option></option>
+        <option repeat.for="i of 28">${i+1}</option>
+      </select>
+
+      <button type="button" click.delegate="updateEvent()">Edit Event</button>
+
+      <button type="button" click.delegate="createEvent()">Create Event</button>
+      <button type="button" click.delegate="deleteEvent()">Delete Event</button>
+    </div>
+
+
   </section>
 </template>
