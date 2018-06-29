@@ -2,162 +2,209 @@ import './calendar.scss';
 
 export class Calendar {
   constructor() {
-      this.heading = 'Calendar App';
-      this.promptHeading = '';
+    this.heading = 'Calendar App';
+    this.promptHeading = '';
 
-      this.events = [
-        {
-          eventName: "meeting",
-          eventDate: 2,
-          eventId: 0,
-        },
-        {
-          eventName: 'meeting2',
-          eventDate: 2,
-          eventId: 1,
-        }
-      ];
-
-      this.numOfEvents = 2;
-
-      this.currentEvent = {
-        eventName: '',
-        eventDate: 1,
-        eventId: -1
-      };
-
-      // for (var i = 0; i<28; i++){
-      //   let event = events.[i];
-      //   document.getElementById(i).classList.add("selected")
-      // }
-      for (let[index, value] of this.events.entries()){
-        let date = value.eventDate.toString();
-        // document.getElementById(2).classList.add("selected");
-        document.getElementsByClassName("dateElement");
+    this.events = [
+      {
+        eventName: "meeting",
+        eventDate: 2,
+        eventId: 0,
+      },
+      {
+        eventName: 'meeting2',
+        eventDate: 2,
+        eventId: 1,
       }
+    ];
+
+    // Holds values for the event to be created or edited
+    this.currentEvent = {
+      eventName: '',
+      eventDate: 1,
+      eventId: -1
+    };
+
+    // keeps track of the selected date
+    this.selectedDate = 0;
+
+    // keeps track of the event name
+    this.selectedName = '';
+
+    // keeps track of the selected id;
+    this.selectedId = -1;
+
+    // Keeping track of the events on the selected day
+    this.dateEvents = [];
+    // counter of the events for creating new eventId's
+    this.numOfEvents = 2;
+
+    this.selection = false;
 
 
-      //add events of the date selected
-      this.selectedDate = 0;
-      this.createdName = '';
-      this.dateEvents = []
   }
 
+
+  //======= Display & Select =======//
+  // action when a date is selected from the calendar
   dateSelected(date) {
-    console.log(date);
-    this.showCurrent();
+    this.resetSelection();
     this.selectedDate = Number(date);
-    console.log(this.selectedDate);
     this.fillOutForm();
-    this.showList();
-    this.fillOutForm();
-
-  }
-
-
-  showList(){
-    console.log('showList() date: ');
-    this.promptHeading = 'Events for ' + this.selectedDate;
-    // Fetch all events for this date from the main list
-    this.dateEvents = this.events.filter(event=> event.eventDate === this.selectedDate );
-    console.log(this.dateEvents);
-    // Show the event prompts at the bottom of the page
-    document.getElementById("prompt").classList.toggle("show");
-    // clear any previous events and prevent duplicate events appearing
     this.clearList();
-    // A  ``
-    document.getElementById('eventList').appendChild(this.makeUl(this.dateEvents));
-    document.getElementById("eventDate").value = this.selectedDate;
-
+    this.showList();
   }
 
-  clearList(){
-    document.getElementById("eventList").innerHTML= '';
+  // creates header for the events list
+  showList(){
+    this.promptHeading = 'Events for ' + this.selectedDate;
+
+    // Fetch all events for this date from the main list
+    this.dateEvents = this.events.filter(event => event.eventDate === Number(this.selectedDate));
+
+    // Show the event prompts at the bottom of the page
+    // document.getElementById("prompt").classList.toggle("show");
+
+
+    // fill a ul events for the selected date
+    document.getElementById('eventList').appendChild(this.makeUl(this.dateEvents));
+  }
+
+  // makes the event selected from the list the current event
+  selectEvent() {
+    this.selection = true;
+    console.log(event.target.value);
+    if(event.target.value !== "ADD"){
+      this.currentEvent = this.events.find(x => x.eventId == event.target.value);
+      this.selectedDate = Number(this.currentEvent.eventDate);
+      this.selectedId = this. currentEvent.eventId;
+      this.selectedName = this.currentEvent.eventName;
+
+    }
+    else{this.selection = false;}
   }
 
 
   //renders the list of events
   makeUl(events) {
-    console.log('makeUl()');
     var list = document.createElement('ul');
 
     for(var i = 0; i < events.length; i++) {
       let event = events[i];
-      let eventId = event.eventId;
       var item = document.createElement('li');
-      // console.log(event);
       let e = document.createTextNode(event.eventName);
-      let s = document.createElement('span');
-      let id = 'eventNum' + i;
-      // console.log(id);
-      // let b = document.createElement("button");
-      // b.innerHTML = 'Edit Event';
-      // b.addEventListener("click", this.editEvent(function(){alert('test')}));
-      // b.innerHTML = '<button id = id  onclick="this.editEvent(' + event+')"> Delete</button>';
       item.appendChild(e);
-      // item.appendChild(b);
-
       list.appendChild(item);
     }
-
     return list;
   }
 
-  selectEvent() {
-    this.currentEvent = this.events.find(x => x.eventId == event.target.value);
+
+  //====== Create =====//
+  createEvent(){
     this.showCurrent();
-    console.log('select()');
+    if(this.selection){return false;}
 
-    // let popup = document.getElementById("myPopup");
-    // popup.classList.toggle("show");
 
-      // console.log(document.getElementsByClassName("dateElement"));
-      // var items = document.getElementsByClassName("dateElement");
-      // for (var i = 0; i<items.length; i++){
-      //   items[i].classList.add("selectable");
-      // }
-    // this.clearForm();
-  }
+    // if(!this.checkInputs()){return;}
 
-  fillOutForm() {
-    console.log('filloutform');
-    console.log(this.currentEvent.eventDate);
-    document.getElementById("eventName").value = this.currentEvent.eventName;
-    document.getElementById("eventDate").value = this.selectedDate;
-  }
+    // increment the counter and make it the eventId
+    this.numOfEvents++;
+    this.selectedId = this.numOfEvents;
 
-  clearForm(){
-    document.getElementById("eventName").value = '';
-    // document.getElementById('');
-    document.getElementById("eventDate").value = 0;
-  }
+    this.currentEvent = {};
+    // create a copy of currentEvent and push to events
+    this.currentEvent.eventDate = Number(document.getElementById("eventDate").value);
+    this.currentEvent.eventName = document.getElementById("eventName").value;
+    this.currentEvent.eventId = this.selectedId;
 
-  deleteEvent(name, date) {
-    console.log('hello');
-    console.log(name + date);
-  }
+    var newEvent = {
+      eventName:this.currentEvent.eventName,
+      eventDate:this.currentEvent.eventDate,
+      eventId:this.currentEvent.eventId,
+    };
 
-  findIndex(id){
-    for(let i = 0; i < this.events.length; i++){
-      if(this.events[i].eventId == id){
-        return i;
-      }
+    if(this.checkInputs(newEvent)){
+      this.events.push(newEvent);
+      // this.resetCurrentEvent();
+      this.clearList();
+      // show the list for the date the event was created for
+      this.showList();
+      this.clearForm();
     }
-    return -1;
   }
+
+
+  //====== Edit =====//
+  // updates the event with the same eventId as currentEvent
   updateEvent(){
-    if(!this.checkInputs()){return;}
+    console.log('==***==');
 
-    console.log('updateEvent()');
-    this.showCurrent();
+    let date = Number(document.getElementById("eventDate").value);
+    let name = document.getElementById("eventName").value;
+    // finds the event in events and changes the name and date
+    this.events.find(x=> x.eventId === this.selectedId).eventDate = Number(date);
+    this.events.find(x=> x.eventId === this.selectedId).eventName = name;
 
-    this.events.find(x=> x.eventId === this.currentEvent.eventId).eventName = this.currentEvent.eventName;
-    this.events.find(x=> x.eventId === this.currentEvent.eventId).eventDate = Number(this.selectedDate);
+    //
     this.clearList();
     this.showList(Number(this.selectedDate));
     this.clearForm();
-    this.updateForm();
+    this.selection = false;
+  }
 
+  //===== Delete =====//
+  deleteEvent(){
+
+    // catch trying to delete with no event selected
+    if(this.selectedId === -1){ return false;}
+
+    // get index of event with matching eventId
+    let eventIndex=0;
+    for (let i = 0; i < this.events.length; i++){
+      if(this.selectedId === this.events[i].eventId){
+        eventIndex = i;
+      }
+    }
+
+    // splice out event from events
+    this.events.splice(eventIndex, 1);
+    this.clearForm();
+    this.clearList();
+    this.showList(this.selectedDate);
+    this.selection = false;
+  }
+
+  //===== Utilities =====/
+  // fills out the form with the information from the current Event
+  fillOutForm() {
+    document.getElementById("eventName").value = this.selectedName;
+    document.getElementById("eventDate").value = this.selectedDate;
+  }
+
+  // clears out the form
+  clearForm(){
+    document.getElementById("eventName").value = '';
+    // document.getElementById("eventDate").value = 0;
+  }
+
+  // checks for an event with proper date and name
+  checkInputs(event){
+    if(event.eventName === '' ||
+      event.eventDate === '') {
+      return false;
+    }
+    return true;
+  }
+
+  // clears the ul of events
+  clearList(){
+    document.getElementById("eventList").innerHTML= '';
+  }
+
+  updateForm(){
+    this.clearForm();
+    this.fillOutForm();
   }
 
   showCurrent(){
@@ -174,68 +221,7 @@ export class Calendar {
 
   };
 
-  createEvent(){
-    this.currentEvent.eventDate = this.selectedDate;
-    console.log('createEvent()');
-    this.showCurrent();
-    console.log('====');
-    console.log(this.currentEvent.eventName);
-    if(!this.checkInputs()){return;}
-
-    // this.currentEvent.eventName = document.getElementById("eventName").value;
-
-    this.numOfEvents++;
-    this.currentEvent.eventId = this.numOfEvents;
-    this.currentEvent.eventDate = this.selectedDate;
-
-    console.log(this.currentEvent.eventId);
-
-    let newEvent = Object.assign({}, this.currentEvent);
-    console.log(newEvent);
-    this.events.push(newEvent);
-
-
-
-    this.showList(this.selectedDate);
-    this.clearForm();
-    this.resetCurrentEvent();
-
-
-  }
-
-  checkInputs(){
-    if(this.currentEvent.eventName === '' ||
-      this.currentEvent.eventDate === '')
-    {
-      return false;
-    }
-    return true;
-  }
-  updateForm(){
-    this.clearForm();
-    this.fillOutForm();
-  }
-
-  deleteEvent(){
-    console.log('eventId()');
-    console.log(this.currentEvent.eventId);
-
-    if(this.currentEvent.eventId === -1){ return false;}
-    let eventIndex=0;
-    for (let i = 0; i < this.events.length; i++){
-      if(this.currentEvent.eventId === this.events[i].eventId){
-        eventIndex = i;
-      }
-    }
-    console.log('event index: ' + eventIndex);
-    this.events.splice(eventIndex, 1);
-    this.showCurrent();
-    this.clearForm();
-    this.clearList();
-    this.showList(Number(this.selectedDate));
-    this.resetCurrentEvent();
-  }
-
+  // for resetting the current event
   resetCurrentEvent(){
     this.currentEvent.eventName = '';
     this.currentEvent.eventId = -1;
@@ -243,4 +229,9 @@ export class Calendar {
 
   }
 
+  resetSelection(){
+    this.selectedDate = 0;
+    this.selectedName = '';
+    this.selectedId = -1;
+  }
 }

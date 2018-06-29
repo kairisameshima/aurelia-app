@@ -19,24 +19,13 @@ section{
     }
 
 
-  .prompt {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-  }
-  .prompt {
-      visibility: hidden;
-
-  }
-  .prompt .show {
-    visibility: visible;
-    -webkit-animation: fadeIn 1s;
-    animation: fadeIn 1s
+  #prompt {
+    position: absolute;
+    padding-left: 15px;
+    border-radius: 5px;
+    background-color: #cccccc;
+    width: 800px;
   }
 
-  @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity:1 ;}
-  }
 
 }

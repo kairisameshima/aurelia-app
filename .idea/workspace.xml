@@ -27,8 +27,8 @@
           <file leaf-file-name="calendar.scss" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/calendar.scss">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="294">
-                  <caret line="26" column="9" lean-forward="false" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+                <state relative-caret-position="390">
+                  <caret line="26" column="17" lean-forward="false" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
                   <folding />
                 </state>
               </provider>
@@ -37,11 +37,13 @@
           <file leaf-file-name="calendar.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/calendar.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="216">
-                  <caret line="225" column="28" lean-forward="false" selection-start-line="225" selection-start-column="28" selection-end-line="225" selection-end-column="28" />
+                <state relative-caret-position="2070">
+                  <caret line="153" column="3" lean-forward="true" selection-start-line="153" selection-start-column="3" selection-end-line="153" selection-end-column="3" />
                   <folding>
-                    <element signature="e#2435#2454#0" expanded="false" />
-                    <marker date="1530286283000" expanded="true" signature="689:878" ph="..." />
+                    <element signature="e#152#337#0" expanded="false" />
+                    <element signature="e#160#241#0" expanded="false" />
+                    <element signature="e#249#331#0" expanded="false" />
+                    <element signature="e#422#488#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
@@ -54,8 +56,8 @@
           <file leaf-file-name="calendar.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/calendar.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="384">
-                  <caret line="66" column="25" lean-forward="true" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="25" />
+                <state relative-caret-position="1080">
+                  <caret line="72" column="14" lean-forward="false" selection-start-line="72" selection-start-column="14" selection-end-line="72" selection-end-column="14" />
                   <folding />
                 </state>
               </provider>
@@ -74,6 +76,12 @@
       <find>clearList</find>
       <find>selected</find>
       <find>eventName</find>
+      <find>eventd</find>
+      <find>updateForm</find>
+      <find>resetCurrentEvent</find>
+      <find>reset</find>
+      <find>con</find>
+      <find>showcu</find>
     </findStrings>
     <replaceStrings>
       <replace>dateElement</replace>
@@ -86,8 +94,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/calendar.scss" />
         <option value="$PROJECT_DIR$/src/calendar.html" />
+        <option value="$PROJECT_DIR$/src/calendar.scss" />
         <option value="$PROJECT_DIR$/src/calendar.js" />
       </list>
     </option>
@@ -227,12 +235,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1530222679683</updated>
-      <workItem from="1530222681353" duration="26296000" />
+      <workItem from="1530222681353" duration="35765000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26296000" />
+    <option name="totallyTimeSpent" value="35765000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -264,33 +272,37 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/calendar.scss">
+    <entry file="file://$PROJECT_DIR$/src/calendar.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="26" column="9" lean-forward="false" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+        <state relative-caret-position="1080">
+          <caret line="72" column="14" lean-forward="false" selection-start-line="72" selection-start-column="14" selection-end-line="72" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/calendar.html">
+    <entry file="file://$PROJECT_DIR$/src/calendar.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="66" column="25" lean-forward="true" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="25" />
+        <state relative-caret-position="390">
+          <caret line="26" column="17" lean-forward="false" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/calendar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="225" column="28" lean-forward="false" selection-start-line="225" selection-start-column="28" selection-end-line="225" selection-end-column="28" />
+        <state relative-caret-position="2070">
+          <caret line="153" column="3" lean-forward="true" selection-start-line="153" selection-start-column="3" selection-end-line="153" selection-end-column="3" />
           <folding>
-            <element signature="e#2435#2454#0" expanded="false" />
-            <marker date="1530286283000" expanded="true" signature="689:878" ph="..." />
+            <element signature="e#152#337#0" expanded="false" />
+            <element signature="e#160#241#0" expanded="false" />
+            <element signature="e#249#331#0" expanded="false" />
+            <element signature="e#422#488#0" expanded="false" />
           </folding>
         </state>
       </provider>
